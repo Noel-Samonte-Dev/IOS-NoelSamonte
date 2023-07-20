@@ -9,9 +9,19 @@ import SwiftUI
 
 @main
 struct App_Dev_Test_ProjectApp: App {
+    @State var timer_done: Bool = false
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if (timer_done) {
+                ButtonPage()
+            } else {
+                SplashScreen()
+                    .onAppear(){
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                            self.timer_done = true
+                        }
+                    }
+            }
         }
     }
 }
